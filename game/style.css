@@ -1,0 +1,13 @@
+body{
+    font-family: Comic Sans MS;
+    color: lightyellow;
+    background-color: lightseagreen;
+}
+.game{
+    display: block;
+    margin: auto;
+    width: 800px;
+    height: 400px;
+    border: 7px solid lightcyan;
+    border-radius: 20px;
+}
