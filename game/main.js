@@ -1,10 +1,8 @@
 var canvas, ctx, cWidth, cHeight;
-var pic = new Image();
-pic.src='images/pesho-1.png';
-
+var pic = document.getElementById('down');
 function pesho()
 {
-    ctx.drawImage(pic, 20, 20, 60, 60);
+        ctx.drawImage(pic, 20, 20, 60, 60);
 }
 function background()
 {
