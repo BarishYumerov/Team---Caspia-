@@ -6,6 +6,7 @@ barrelPic.src = 'images/barrel.png';
 
 var yPesho=70;
 var xBarrel = 300;
+var fast = 40;
 
 function pesho() {
     ctx.drawImage(peshoPic, 20, yPesho, 60, 60);
@@ -50,7 +51,11 @@ function init() {
     pesho();
     barrel();
     ctx.restore();
-    var loopTimer = setTimeout('init('+')',10);
+    var loopTimer = setTimeout('init('+')',fast);
+    if(fast > 10) {
+        fast -= 0.02;
+    }
+
 }
 
 window.addEventListener('load', init);
