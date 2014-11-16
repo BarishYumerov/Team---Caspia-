@@ -4,9 +4,16 @@ peshoPic.src='images/pesho-1.png';
 var barrelPic = new Image();
 barrelPic.src = 'images/barrel.png';
 var x = 300;
+var yPesho=70;
 
 function pesho() {
-    ctx.drawImage(peshoPic, 20, 70, 60, 60);
+    ctx.drawImage(peshoPic, 20, yPesho, 60, 60);
+}
+function jump(){
+    ctx.save();
+    ctx.drawImage(barrelPic, x, 100, 25, 25);
+    ctx.restore();
+
 }
 function barrel(){
     ctx.save();
