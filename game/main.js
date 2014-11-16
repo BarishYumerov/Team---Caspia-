@@ -3,8 +3,9 @@ var peshoPic = new Image();
 peshoPic.src='images/pesho-1.png';
 var barrelPic = new Image();
 barrelPic.src = 'images/barrel.png';
-var x = 300;
+
 var yPesho=70;
+var xBarrel = 300;
 
 function pesho() {
     ctx.drawImage(peshoPic, 20, yPesho, 60, 60);
@@ -17,9 +18,12 @@ function jump(){
 }
 function barrel(){
     ctx.save();
-    ctx.drawImage(barrelPic, x, 100, 25, 25);
+    ctx.drawImage(barrelPic, xBarrel, 100, 25, 25);
+    for( var i = 0; i < 100 ; i++){
+        ctx.drawImage(barrelPic, xBarrel + i*50, 100, 25, 25);
+    }
     ctx.restore();
-    x -= 2;
+    xBarrel -= 2;
 
 
 }
