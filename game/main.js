@@ -21,7 +21,7 @@ function barrel(){
     ctx.save();
     ctx.drawImage(barrelPic, xBarrel, 100, 25, 25);
     for( var i = 0; i < 100 ; i++){
-        ctx.drawImage(barrelPic, xBarrel + i*50, 100, 25, 25);
+        ctx.drawImage(barrelPic, xBarrel + i*60, 100, 25, 25);
     }
     ctx.restore();
     xBarrel -= 2;
