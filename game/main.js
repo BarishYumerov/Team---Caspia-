@@ -1,5 +1,4 @@
 var canvas, ctx, cWidth, cHeight;
-
 var peshoPic = new Image();
 peshoPic.src='images/pesho-1.png';
 var barrelPic = new Image();
@@ -16,13 +15,6 @@ function barrel(){
     x -= 2;
 
 
-
-var pic = new Image();
-pic.src='images/pesho-1.png';
-
-function pesho()
-{
-    ctx.drawImage(pic, 20, 20, 60, 60);
 }
 function background() {
     grd = ctx.createLinearGradient(0,0,0, cHeight);
