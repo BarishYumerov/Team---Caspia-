@@ -3,12 +3,18 @@ var peshoPic = new Image();
 peshoPic.src='images/pesho-1.png';
 var barrelPic = new Image();
 barrelPic.src = 'images/barrel.png';
+var x = 220;
 
 function pesho() {
     ctx.drawImage(peshoPic, 20, 70, 60, 60);
 }
 function barrel(){
-    ctx.drawImage(barrelPic, 220, 100, 25, 25);
+    ctx.save();
+    ctx.drawImage(barrelPic, x, 100, 25, 25);
+    ctx.restore();
+    x -= 2;
+
+
 }
 function background() {
     grd = ctx.createLinearGradient(0,0,0, cHeight);
@@ -27,9 +33,13 @@ function init() {
     ctx=canvas.getContext('2d');
     cWidth=canvas.width;
     cHeight=canvas.height;
+    ctx.save();
+    clear();
     background();
     pesho();
     barrel();
+    ctx.restore();
+    var loopTimer = setTimeout('init('+')',10);
 }
 
 window.addEventListener('load', init);
