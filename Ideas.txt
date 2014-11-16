@@ -5,3 +5,4 @@ Reversi
 http://www.gamesforthebrain.com/game/reversi/ - igra
  http://en.wikipedia.org/wiki/Reversi  - info
  _____________________________________________________________________________________________________
+ test
