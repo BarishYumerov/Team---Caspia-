@@ -3,7 +3,7 @@ var peshoPic = new Image();
 peshoPic.src='images/pesho-1.png';
 var barrelPic = new Image();
 barrelPic.src = 'images/barrel.png';
-var x = 220;
+var x = 300;
 
 function pesho() {
     ctx.drawImage(peshoPic, 20, 70, 60, 60);
