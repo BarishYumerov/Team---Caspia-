@@ -10,7 +10,7 @@ var xBarrel = 300;
 var fast = 40;
 var rnd = [];
 for( var i = 0 ; i < 1000; i++){
-    rnd[i] = Math.floor(Math.random()*(80-45+1)+45);
+    rnd[i] = Math.floor(Math.random()*(80-16+1)+16);
 }
 
 function pesho() {
@@ -29,9 +29,8 @@ function barrel(){
     }
     ctx.restore();
     xBarrel -= 2;
-
-
 }
+
 function background() {
     grd = ctx.createLinearGradient(0,0,0, cHeight);
     grd.addColorStop(0.339, 'rgba(7, 35, 63, 1.000)');
