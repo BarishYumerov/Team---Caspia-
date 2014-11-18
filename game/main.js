@@ -3,17 +3,32 @@ var peshoPic = new Image();
 peshoPic.src='images/pesho-1.png';
 var barrelPic = new Image();
 barrelPic.src = 'images/barrel.png';
-var x = 1000;
+var rocks = [];
 
-function pesho() {
-    ctx.drawImage(peshoPic, 20, 270, 120, 150);
+var yPesho=90;
+var xBarrel = 300;
+var fast = 40;
+var rnd = [];
+for( var i = 0 ; i < 1000; i++){
+    rnd[i] = Math.floor(Math.random()*(80-16+1)+16);
 }
 
-function barrel() {
+function pesho() {
+    ctx.drawImage(peshoPic, 20, yPesho, 35, 35);
+}
+function jump(){
     ctx.save();
-    ctx.drawImage(barrelPic, x, 360, 50, 50);
+    ctx.drawImage(barrelPic, x, 100, 25, 25);
     ctx.restore();
-    x -= 2;
+
+}
+function barrel(){
+    ctx.save();
+    for( var i = 0; i < 1000 ; i++){
+        rocks[i] = ctx.drawImage(barrelPic, xBarrel + i*rnd[i], 110, 15, 15);
+    }
+    ctx.restore();
+    xBarrel -= 2;
 }
 
 function background() {
@@ -25,11 +40,9 @@ function background() {
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, cWidth, cHeight);
 }
-
 function clear() {
     ctx.clearRect(0,0, cWidth,cHeight);
 }
-
 function init() {
     canvas=document.getElementById('game');
     ctx=canvas.getContext('2d');
@@ -41,7 +54,11 @@ function init() {
     pesho();
     barrel();
     ctx.restore();
-    var loopTimer = setTimeout('init('+')',10);
+    var loopTimer = setTimeout('init('+')',fast);
+    if(fast > 10) {
+        fast -= 0.02;
+    }
+
 }
 
 window.addEventListener('load', init);
