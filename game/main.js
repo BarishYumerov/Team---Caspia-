@@ -5,7 +5,7 @@ var barrelPic = new Image();
 barrelPic.src = 'images/barrel.png';
 var rocks = [];
 
-var yPesho=90;
+var yPesho=270;
 var xBarrel = 300;
 var fast = 40;
 var rnd = [];
@@ -14,8 +14,9 @@ for( var i = 0 ; i < 1000; i++){
 }
 
 function pesho() {
-    ctx.drawImage(peshoPic, 20, yPesho, 35, 35);
+    ctx.drawImage(peshoPic, 20, yPesho, 120, 150);
 }
+
 function jump(){
     ctx.save();
     ctx.drawImage(barrelPic, x, 100, 25, 25);
@@ -25,7 +26,7 @@ function jump(){
 function barrel(){
     ctx.save();
     for( var i = 0; i < 1000 ; i++){
-        rocks[i] = ctx.drawImage(barrelPic, xBarrel + i*rnd[i], 110, 15, 15);
+        rocks[i] = ctx.drawImage(barrelPic, xBarrel + i*rnd[i], 360, 50, 50);
     }
     ctx.restore();
     xBarrel -= 2;
