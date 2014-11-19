@@ -1,22 +1,28 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Try not to get drunk</title>
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/css/style.css"/>
+    <title>Dont' Get Drunk</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="lib/js/main.js"></script>
 </head>
 <body>
-<main>
-    <img url="images/pesho-1.png" id="down"/>
-    <img url="images/pesho-2.png" id="up"/>
 
-    <canvas id="game" width="1000" height="500">
+<main>
+    <img src="lib/images/logo.jpg" id="logo" alt="Dont' Get Drunk" />
+    <a class="btn" id="play" onclick="return false;" href="">PLAY</a>
+
+    <img url="lib/images/player_run.png" id="down"/>
+    <img url="lib/images/player_jump.png" id="up"/>
+    
+    <canvas id="canvas" width="1000" height="500">
         Your browser is not supporting canvas.
     </canvas>
 </main>
 <footer>
-    Powered by team Caspia 2014
+    <!--Powered by team Caspia 2014 -->
 </footer>
 </body>
 </html>
