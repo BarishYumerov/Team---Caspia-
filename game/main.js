@@ -14,12 +14,12 @@ for( var i = 0 ; i < 1000; i++){
     rnd[i] = Math.floor(Math.random()*(400-100+1)+100);
 =======
 var yPesho = 270;
-var xBarrel = 300;
+var xBarrel = 1000;
 var fast = 40;
 var rnd = [];
 
 for (var i = 0 ; i < 1000; i++) {
-    rnd[i] = Math.floor(Math.random() * (80 - 16 + 1) + 16);
+    rnd[i] = Math.floor(Math.random() * (300 - 106 + 1) + 106);
 >>>>>>> origin/master
 }
 
