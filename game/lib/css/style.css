@@ -58,9 +58,59 @@ img {
 }
 
 #play {
+    z-index: 10;
     width: 50px;
     display: block;
     position: relative;
     margin: auto;
-    top: -105px;
+    top: -110px;
+    left: 0;
+}
+
+#bubble1 {
+    z-index: 2;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #575757;
+    border-radius: 800px;
+    opacity: .8;
+    top: -100px;
+    right: -100px;
+}
+
+#bubble2 {
+    z-index: 1;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #575757;
+    border-radius: 800px;
+    opacity: .8;
+    bottom: -100px;
+    right: -100px;
+}
+
+#bubble3 {
+    z-index: 1;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #575757;
+    border-radius: 800px;
+    opacity: .8;
+    bottom: -100px;
+    left: -100px;
+}
+
+#bubble4 {
+    z-index: 1;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -100px;
+    left: -100px;
+    background: #575757;
+    border-radius: 800px;
+    opacity: .8;
 }
