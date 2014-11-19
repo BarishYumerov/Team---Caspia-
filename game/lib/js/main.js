@@ -40,46 +40,42 @@ moonPic.src = 'lib/images/Moon.png';
 var starsPic = new Image();
 starsPic.src = 'lib/images/Stars.png';
 
-var yPesho = 270;
 var xBarrel = 1000;
 var fast = 40;
-var rnd = [];
+var isInJump = false;
+var hits = 0;
 
-var jumping = false;
+var player = {
+	x: 100,
+	y: 270,
+	width: 120,
+	height: 150,
+	img: peshoPic,
+	jumpingImg: peshoJumpPic,
+	isAlive: true
+};
 
-for (var i = 0 ; i < 1000; i++) {
-    rnd[i] = Math.floor(Math.random() * (500 - 106 + 1) + 306);
-}
-
-function pesho() {
-    if (jumping) {
-        ctx.drawImage(peshoJumpPic, 20, yPesho - 70, 120, 150);
-    } else {
-        ctx.drawImage(peshoPic, 20, yPesho, 120, 150);
+function displayPlayer() {
+	var playerDisplayImg = player.img,
+		currentPlayerY = player.y;
+    if (isInJump) {
+    	playerDisplayImg = player.jumpingImg;
+    	currentPlayerY -= 100;
     }
-}
-
-function jump() {
-    ctx.save();
-    ctx.drawImage(barrelPic, x, 100, 25, 25);
-    ctx.restore();
+    
+    ctx.drawImage(playerDisplayImg, player.x, currentPlayerY, player.width, player.height);
 }
 
 function updateBarrels() {
-    //ctx.save();
-    //for (var i = 0; i < 1000 ; i++) {
-      //  rocks[i] = ctx.drawImage(barrelPic, xBarrel + i * rnd[i], 360, 50, 50);
-    //}
-    //ctx.restore();
-
     //create barrells
-    if (barrels.length < 5) {
+    if (barrels.length < 4) {
     	var rand = Math.random() * (Math.random() * 3245);
     	var barrelX = parseInt(xBarrel + rand);
     	barrels.push({
     		x: barrelX,
     		y: 360,
-    		initialX: barrelX
+    		initialX: barrelX,
+    		hasHitPlayer: false
     	});
     }
 
@@ -88,6 +84,7 @@ function updateBarrels() {
     	if ((barrels[i].x + 50) < 0) {
     		var rand = Math.random() * (Math.random() * 3532);
     		barrels[i].x = barrels[i].initialX + parseInt(rand);
+    		barrels[i].hasHitPlayer = false;
     		continue;
     	}
 
@@ -99,6 +96,25 @@ function drawBarrels() {
 	for (var i = 0, length = barrels.length; i < length; i++) {
     	ctx.drawImage(barrelPic, barrels[i].x, barrels[i].y, 50, 50);
     }
+}
+
+function checkForCollisions() {
+	for (var i = 0, length = barrels.length; i < length; i++) {
+		if (barrels[i].x <= (player.x + player.width - 50)) {
+			if (barrels[i].x - 10 > player.x) {
+				if (!isInJump) {
+					if (!barrels[i].hasHitPlayer) {
+						hits++;
+						barrels[i].hasHitPlayer = true;
+					}
+				}
+			}
+		}
+	}
+
+	if (hits == 3) {
+		player.isAlive = false;
+	}
 }
 
 function background() {
@@ -123,15 +139,15 @@ function clear() {
     ctx.clearRect(0, 0, cWidth, cHeight);
 }
 
-function playerJump() {
-    if (!jumping) {
-        jumping = true;
+function jump() {
+    if (!isInJump) {
+        isInJump = true;
         setTimeout(land, 1000);
     }
 }
 
 function land() {
-    jumping = false;
+    isInJump = false;
 }
 
 function init() {
@@ -141,28 +157,43 @@ function init() {
     cHeight = canvas.height;
     ctx.save();
     clear();
+
+    //draw
     background();
-    pesho();
-    updateBarrels();
+    displayPlayer();
     drawBarrels();
     drawSky();
     ctx.font = "bold 12px Comic Sans MS";
     ctx.fillStyle = "red";
     ctx.fillText("fps: TEST TEST", 10, 10);
+    //game logic and objects update
+    updateBarrels();
+    checkForCollisions();
+
+    //debug section
+    //if (hits !== 0) {
+    //	console.log("Hit " + hits);
+    //}
+
+    //if (!player.isAlive) {
+    //	console.log("Player is DEAD.")
+    //	player.isAlive = true;
+    //	hits = 0;
+    //}
+    //end of debug section
+
     ctx.restore();
     var loopTimer = setTimeout('init(' + ')', fast);
 
     if (fast > 10) {
-        fast -= 0.02;
+        fast -= 0.002;
     }
 }
 
 document.addEventListener("keydown", function(event){
     var keyCode = event.keyCode;
     if (keyCode == 32) {
-        playerJump();
-    } else {
-        jumping = false;
+        jump();
     }
 });
 
