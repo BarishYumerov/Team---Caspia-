@@ -29,7 +29,7 @@ $(function () {
     }
 
     if (!stopSound) {
-        new Audio('lib/sound/song.mp3').play();
+        //new Audio('lib/sound/song.mp3').play();
     }
 
     soundBtn.click(function () {

@@ -34,6 +34,12 @@ var barrelPic = new Image();
 barrelPic.src = 'lib/images/barrel.png';
 var barrels = [];
 
+var moonPic = new Image();
+moonPic.src = 'lib/images/Moon.png';
+
+var starsPic = new Image();
+starsPic.src = 'lib/images/Stars.png';
+
 var yPesho = 270;
 var xBarrel = 1000;
 var fast = 40;
@@ -96,13 +102,21 @@ function drawBarrels() {
 }
 
 function background() {
-    grd = ctx.createLinearGradient(0, 0, 0, cHeight);
-    grd.addColorStop(0.339, 'rgba(7, 35, 63, 1.000)');
-    grd.addColorStop(0.792, 'rgba(6, 6, 61, 1.000)');
-    grd.addColorStop(0.797, 'rgba(43, 22, 2, 1.000)');
-    grd.addColorStop(0.904, 'rgba(25, 9, 9, 1.000)');
+    grd = ctx.createLinearGradient(310.170, 0.000, 322.830, 534.000);
+    grd.addColorStop(0.000, 'rgba(8, 21, 112, 1.000)');
+    grd.addColorStop(0.505, 'rgba(0, 127, 127, 1.000)');
+    grd.addColorStop(0.756, 'rgba(0, 191, 191, 1.000)');
+    grd.addColorStop(0.758, 'rgba(51, 51, 51, 1.000)');
+    grd.addColorStop(0.864, 'rgba(25, 25, 25, 1.000)');
+    grd.addColorStop(0.958, 'rgba(0, 0, 0, 1.000)');
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, cWidth, cHeight);
+}
+
+function drawSky(){
+    ctx.drawImage(moonPic, 250, 50, 120, 120);
+    ctx.drawImage(starsPic, 300, -50, 400, 400);
+    ctx.drawImage(starsPic, 650, -50, 400, 400);
 }
 
 function clear() {
@@ -131,7 +145,10 @@ function init() {
     pesho();
     updateBarrels();
     drawBarrels();
-
+    drawSky();
+    ctx.font = "bold 12px Comic Sans MS";
+    ctx.fillStyle = "red";
+    ctx.fillText("fps: TEST TEST", 10, 10);
     ctx.restore();
     var loopTimer = setTimeout('init(' + ')', fast);
 
