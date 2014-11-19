@@ -23,8 +23,13 @@ $(function () {
 // Game Logic
 
 var canvas, ctx, cWidth, cHeight;
+
 var peshoPic = new Image();
 peshoPic.src = 'lib/images/player_run.png';
+
+var peshoJumpPic = new Image();
+peshoJumpPic.src = 'lib/images/player_jump.png';
+
 var barrelPic = new Image();
 barrelPic.src = 'lib/images/barrel.png';
 var rocks = [];
@@ -34,19 +39,24 @@ var xBarrel = 1000;
 var fast = 40;
 var rnd = [];
 
+var jumping = false;
+
 for (var i = 0 ; i < 1000; i++) {
     rnd[i] = Math.floor(Math.random() * (500 - 106 + 1) + 306);
 }
 
 function pesho() {
-    ctx.drawImage(peshoPic, 20, yPesho, 120, 150);
+    if (jumping) {
+        ctx.drawImage(peshoJumpPic, 20, yPesho - 40, 120, 110);
+    } else {
+        ctx.drawImage(peshoPic, 20, yPesho, 120, 150);
+    }
 }
 
 function jump() {
     ctx.save();
     ctx.drawImage(barrelPic, x, 100, 25, 25);
     ctx.restore();
-
 }
 
 function barrel() {
@@ -72,6 +82,17 @@ function clear() {
     ctx.clearRect(0, 0, cWidth, cHeight);
 }
 
+
+function playerJump() {
+    if (!jumping) {
+        jumping = true;
+        setTimeout(land, 1000);
+    }
+}
+function land() {
+    jumping = false;
+}
+
 function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
@@ -82,6 +103,7 @@ function init() {
     background();
     pesho();
     barrel();
+
     ctx.restore();
     var loopTimer = setTimeout('init(' + ')', fast);
 
@@ -89,6 +111,15 @@ function init() {
         fast -= 0.02;
     }
 }
+
+document.addEventListener("keydown", function(event){
+    var keyCode = event.keyCode;
+    if (keyCode == 32) {
+        playerJump();
+    } else {
+        jumping = false;
+    }
+});
 
 // Calling the init from play event handler "Start Game Loop"
 //window.addEventListener('load', init);
