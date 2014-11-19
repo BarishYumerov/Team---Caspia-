@@ -1,3 +1,27 @@
+// Interface
+
+// Wait for document ready
+$(function () {
+
+    // Declare variables
+    var playBtn = $('#play');
+    var canvas = $('#canvas');
+    var logo = $('#logo');
+
+    // Play button event handler
+    playBtn.click(function () {
+        playBtn.hide();
+        logo.hide();
+        canvas.show();
+
+        // Start Game Loop
+        init();
+        
+    });
+});
+
+// Game Logic
+
 var canvas, ctx, cWidth, cHeight;
 var peshoPic = new Image();
 peshoPic.src = 'lib/images/player_run.png';
@@ -49,7 +73,7 @@ function clear() {
 }
 
 function init() {
-    canvas = document.getElementById('game');
+    canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     cWidth = canvas.width;
     cHeight = canvas.height;
@@ -64,7 +88,7 @@ function init() {
     if (fast > 10) {
         fast -= 0.02;
     }
-
 }
 
-window.addEventListener('load', init);
+// Calling the init from play event handler "Start Game Loop"
+//window.addEventListener('load', init);
