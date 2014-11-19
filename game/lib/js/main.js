@@ -32,7 +32,7 @@ peshoJumpPic.src = 'lib/images/player_jump.png';
 
 var barrelPic = new Image();
 barrelPic.src = 'lib/images/barrel.png';
-var rocks = [];
+var barrels = [];
 
 var yPesho = 270;
 var xBarrel = 1000;
@@ -47,7 +47,7 @@ for (var i = 0 ; i < 1000; i++) {
 
 function pesho() {
     if (jumping) {
-        ctx.drawImage(peshoJumpPic, 20, yPesho - 40, 120, 110);
+        ctx.drawImage(peshoJumpPic, 20, yPesho - 70, 120, 150);
     } else {
         ctx.drawImage(peshoPic, 20, yPesho, 120, 150);
     }
@@ -59,13 +59,40 @@ function jump() {
     ctx.restore();
 }
 
-function barrel() {
-    ctx.save();
-    for (var i = 0; i < 1000 ; i++) {
-        rocks[i] = ctx.drawImage(barrelPic, xBarrel + i * rnd[i], 360, 50, 50);
+function updateBarrels() {
+    //ctx.save();
+    //for (var i = 0; i < 1000 ; i++) {
+      //  rocks[i] = ctx.drawImage(barrelPic, xBarrel + i * rnd[i], 360, 50, 50);
+    //}
+    //ctx.restore();
+
+    //create barrells
+    if (barrels.length < 5) {
+    	var rand = Math.random() * (Math.random() * 3245);
+    	var barrelX = parseInt(xBarrel + rand);
+    	barrels.push({
+    		x: barrelX,
+    		y: 360,
+    		initialX: barrelX
+    	});
     }
-    ctx.restore();
-    xBarrel -= 5;
+
+    //update barrels position
+    for (var i = 0, length = barrels.length; i < length; i++) {
+    	if ((barrels[i].x + 50) < 0) {
+    		var rand = Math.random() * (Math.random() * 3532);
+    		barrels[i].x = barrels[i].initialX + parseInt(rand);
+    		continue;
+    	}
+
+    	barrels[i].x -= 4;
+    }
+}
+
+function drawBarrels() {
+	for (var i = 0, length = barrels.length; i < length; i++) {
+    	ctx.drawImage(barrelPic, barrels[i].x, barrels[i].y, 50, 50);
+    }
 }
 
 function background() {
@@ -82,13 +109,13 @@ function clear() {
     ctx.clearRect(0, 0, cWidth, cHeight);
 }
 
-
 function playerJump() {
     if (!jumping) {
         jumping = true;
         setTimeout(land, 1000);
     }
 }
+
 function land() {
     jumping = false;
 }
@@ -102,7 +129,8 @@ function init() {
     clear();
     background();
     pesho();
-    barrel();
+    updateBarrels();
+    drawBarrels();
 
     ctx.restore();
     var loopTimer = setTimeout('init(' + ')', fast);
