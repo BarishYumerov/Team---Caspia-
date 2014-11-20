@@ -40,8 +40,13 @@ moonPic.src = 'lib/images/Moon.png';
 var starsPic = new Image();
 starsPic.src = 'lib/images/Stars.png';
 
+
 var drunkTextPic = new Image();
 drunkTextPic.src = 'lib/images/text-drunk.png';
+
+var successPic = new Image();
+successPic.src = 'lib/images/approved.jpg';
+
 
 var xBarrel = 1000;
 var fast = 40;
@@ -139,6 +144,9 @@ function checkForCollisions() {
 		player.isDrunk = true;
 	}
 }
+function success(){
+	ctx.drawImage(successPic, 0,0,1000,500);
+}
 
 function background() {
     grd = ctx.createLinearGradient(310.170, 0.000, 322.830, 534.000);
@@ -194,6 +202,11 @@ function init() {
     updateBarrels();
     checkForCollisions();
     calculateScore();
+	if(playerScore === 500){
+		clear();
+		success();
+		ctx.fillText("Score: " + playerScore, 40, 60);
+	}
 
     //debug section
     //if (hits !== 0) {
