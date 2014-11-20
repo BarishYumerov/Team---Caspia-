@@ -3,6 +3,7 @@ $(function () {
     var playBtn = $('#play');
     var playMusic = true;
     var song = new Audio('lib/sound/song.mp3');
+    song.volume=0.1;
     var soundBtn = $('#sound');
     var bubble1 = $('#bubble1');
     var bubble2 = $('#bubble2');
