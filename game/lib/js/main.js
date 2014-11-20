@@ -45,6 +45,8 @@ var fast = 40;
 var isInJump = false;
 var hits = 0;
 
+var playerScore = -400;
+
 var player = {
 	x: 100,
 	y: 270,
@@ -52,7 +54,7 @@ var player = {
 	height: 150,
 	img: peshoPic,
 	jumpingImg: peshoJumpPic,
-	isAlive: true
+	isDrunk: false
 };
 
 function displayPlayer() {
@@ -75,7 +77,8 @@ function updateBarrels() {
     		x: barrelX,
     		y: 360,
     		initialX: barrelX,
-    		hasHitPlayer: false
+    		hasHitPlayer: false,
+            counted: false
     	});
     }
 
@@ -85,10 +88,27 @@ function updateBarrels() {
     		var rand = Math.random() * (Math.random() * 3532);
     		barrels[i].x = barrels[i].initialX + parseInt(rand);
     		barrels[i].hasHitPlayer = false;
+            barrels[i].counted = false;
     		continue;
     	}
 
     	barrels[i].x -= 4;
+    }
+}
+
+function calculateScore(){
+    if (barrels.length === 0){
+        return;
+    }
+    for (var i = 0, length = barrels.length; i < length; i++){
+        if ((barrels[i].x + 50) > player.x){
+            if (!barrels[i].counted){
+                if (!barrels[i].hasHitPlayer){
+                    playerScore += 100;
+                    barrels[i].counted = true;
+                }
+            }
+        }
     }
 }
 
@@ -113,7 +133,7 @@ function checkForCollisions() {
 	}
 
 	if (hits == 3) {
-		player.isAlive = false;
+		player.isDrunk = true;
 	}
 }
 
@@ -163,21 +183,22 @@ function init() {
     displayPlayer();
     drawBarrels();
     drawSky();
-    ctx.font = "bold 12px Comic Sans MS";
-    ctx.fillStyle = "red";
-    ctx.fillText("fps: TEST TEST", 10, 10);
+    ctx.font = "bold 30px Comic Sans MS";
+    ctx.fillStyle = "#755417";
+    ctx.fillText("Score: " + playerScore, 40, 60);
     //game logic and objects update
     updateBarrels();
     checkForCollisions();
+    calculateScore();
 
     //debug section
     //if (hits !== 0) {
     //	console.log("Hit " + hits);
     //}
 
-    //if (!player.isAlive) {
+    //if (player.isDrunk) {
     //	console.log("Player is DEAD.")
-    //	player.isAlive = true;
+    //	player.isDrunk = false;
     //	hits = 0;
     //}
     //end of debug section
