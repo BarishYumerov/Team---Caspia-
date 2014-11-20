@@ -45,7 +45,7 @@ var fast = 40;
 var isInJump = false;
 var hits = 0;
 
-var playerScore = -400;
+var playerScore = 0;
 
 var player = {
 	x: 100,
@@ -101,7 +101,7 @@ function calculateScore(){
         return;
     }
     for (var i = 0, length = barrels.length; i < length; i++){
-        if ((barrels[i].x + 50) > player.x){
+        if ((barrels[i].x + 50) < player.x){
             if (!barrels[i].counted){
                 if (!barrels[i].hasHitPlayer){
                     playerScore += 100;
