@@ -30,17 +30,10 @@ $(function () {
         });
     }
 
-    function hideBubbles() {
-        bubble1.remove();
-        bubble2.remove();
-        bubble3.remove();
-        bubble4.remove();
-    }
-
     // Music
     playBtn.click(function () {
         song.play();
-        hideBubbles();
+        $('.bubble').remove();
     });
 
     soundBtn.click(function () {
