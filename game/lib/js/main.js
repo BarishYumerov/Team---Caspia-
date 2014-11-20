@@ -40,6 +40,9 @@ moonPic.src = 'lib/images/Moon.png';
 var starsPic = new Image();
 starsPic.src = 'lib/images/Stars.png';
 
+var drunkTextPic = new Image();
+drunkTextPic.src = 'lib/images/text-drunk.png';
+
 var xBarrel = 1000;
 var fast = 40;
 var isInJump = false;
@@ -153,6 +156,7 @@ function drawSky(){
     ctx.drawImage(moonPic, 250, 50, 120, 120);
     ctx.drawImage(starsPic, 300, -50, 400, 400);
     ctx.drawImage(starsPic, 650, -50, 400, 400);
+    ctx.drawImage(drunkTextPic, 400, 70, 550, 130);
 }
 
 function clear() {
