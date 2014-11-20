@@ -207,12 +207,12 @@ function init() {
     updateBarrels();
     checkForCollisions();
     calculateScore();
-	if(hits === 3){
+	if(hits >= 3){
 		clear();
 		fail();
 		ctx.fillText("Score: " + playerScore, 40, 60);
 	}
-	if(playerScore === 500){
+	if(playerScore >= 500){
 		clear();
 		success();
 		ctx.fillText("Score: " + playerScore, 40, 60);
