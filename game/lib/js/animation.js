@@ -1,12 +1,14 @@
 $(function () {
 
-    var stopSound = false;
+    var playBtn = $('#play');
+    var stopSound = true;
+    var song = new Audio('lib/sound/song.mp3');
     var soundBtn = $('#sound');
     var bubble1 = $('#bubble1');
     var bubble2 = $('#bubble2');
     var bubble3 = $('#bubble3');
     var bubble4 = $('#bubble4');
-    
+
     animate(bubble1);
     animate(bubble2);
     animate(bubble3);
@@ -28,16 +30,26 @@ $(function () {
         });
     }
 
-    if (!stopSound) {
-        //new Audio('lib/sound/song.mp3').play();
+    function hideBubbles() {
+        bubble1.remove();
+        bubble2.remove();
+        bubble3.remove();
+        bubble4.remove();
     }
+
+    // Music
+    playBtn.click(function () {
+        song.play();
+        hideBubbles();
+    });
 
     soundBtn.click(function () {
 
     });
 
-    // Sound
-    
+
+
+
 
 
 });
