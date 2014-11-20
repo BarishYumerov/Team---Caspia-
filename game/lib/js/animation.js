@@ -1,7 +1,7 @@
 $(function () {
 
     var playBtn = $('#play');
-    var stopSound = true;
+    var playMusic = true;
     var song = new Audio('lib/sound/song.mp3');
     var soundBtn = $('#sound');
     var bubble1 = $('#bubble1');
@@ -20,19 +20,21 @@ $(function () {
 
         bubble.animate({
             opacity: 'toggle',
-            //left: "-=5",
-            //top: "-=20",
             height: 'toggle',
             width: 'toggle'
         }, 5000, function () {
-            // Animation complete.
             animate(bubble);
         });
     }
 
     // Music
     playBtn.click(function () {
-        song.play();
+
+        if (playMusic) {
+            song.play();
+            song.volume = 0.2;
+        }
+
         $('.bubble').remove();
     });
 
