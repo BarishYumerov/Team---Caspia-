@@ -43,6 +43,9 @@ starsPic.src = 'lib/images/Stars.png';
 var successPic = new Image();
 successPic.src = 'lib/images/approved.jpg';
 
+var failPic = new Image();
+failPic.src = 'lib/images/fail.jpg';
+
 var xBarrel = 1000;
 var fast = 40;
 var isInJump = false;
@@ -142,6 +145,9 @@ function checkForCollisions() {
 function success(){
 	ctx.drawImage(successPic, 0,0,1000,500);
 }
+function fail(){
+	ctx.drawImage(failPic, 0,0,1000,500);
+}
 
 function background() {
     grd = ctx.createLinearGradient(310.170, 0.000, 322.830, 534.000);
@@ -196,6 +202,11 @@ function init() {
     updateBarrels();
     checkForCollisions();
     calculateScore();
+	if(hits === 3){
+		clear();
+		fail();
+		ctx.fillText("Score: " + playerScore, 40, 60);
+	}
 	if(playerScore === 500){
 		clear();
 		success();
